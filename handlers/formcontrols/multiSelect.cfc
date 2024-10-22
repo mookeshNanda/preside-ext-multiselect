@@ -66,7 +66,6 @@ component {
 							, filter       = { id = ListToArray( args.defaultValue ) }
 						}
 					]
-					, orderby      = orderBy
 				);
 			} else {
 				args.records = presideObjectService.selectData(
