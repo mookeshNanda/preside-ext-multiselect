@@ -236,11 +236,19 @@ component {
 		var labelRenderer = formParams.labelRenderer = formParams.labelRenderer ?: presideObjectService.getObjectAttribute( object, "labelRenderer" );
 		var selectFields  = labelRendererService.getSelectFieldsForLabel( labelRenderer );
 
-		ArrayAppend( selectFields, "id" );
+		var hasLabelOnSelectField = false;
+		for ( var field in selectFields ) {
+			if ( arrayLen( reMatchNoCase( "^(.*\s+as\s+)?label$", field ) ) ) {
+				hasLabelOnSelectField = true;
+				break;
+			}
+		}
 
-		if( !ArrayFind( selectFields, 'label' ) ){
+		if ( !hasLabelOnSelectField ) {
 			ArrayAppend( selectFields, "label" );
 		}
+
+		ArrayAppend( selectFields, "id" );
 
 		return selectFields;
 	}
